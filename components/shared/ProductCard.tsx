@@ -11,7 +11,7 @@ export default function ProductCard({ id, name, price, description, imgUrl}: Pro
 
   return (
     <Link href={`/products/${id}`}>
-      <Image src={imgUrl} alt="image" width={1000} height={1000} className="w-[287px] h-[382px] rounded-[16px] mb-4"/>
+      <Image src={imgUrl} alt="image" width={1000} height={1000} className="md:w-[287px] aspect-[3/4] rounded-[16px] mb-4"/>
       <div>
         <p className="mb-1 font-semibold text-lg">{name}</p>
         <p className="font-semibold">{formattedPrice}</p>

@@ -4,7 +4,7 @@ import ProductCard from "./ProductCard";
 
 export default function Products() {
   return (
-    <div className="wrapper">
+    <div id="products" className="wrapper">
       <h1 className="h1 text-center mb-20">
         <span>ARE</span>
         <Image

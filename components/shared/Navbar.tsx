@@ -1,7 +1,17 @@
 "use client";
 import Image from "next/image";
-import { Input } from "@/components/ui/input";
 import { useEffect, useState } from "react";
+import Link from "next/link";
+
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
+import Cart from "./Cart";
 
 export default function Navbar() {
   const [prevScrollPos, setPrevScrollPos] = useState(0);
@@ -23,66 +33,66 @@ export default function Navbar() {
   }, [prevScrollPos]);
 
   return (
-    <nav
-      className={`w-full p-2 fixed top-0 z-50 transition-transform duration-300 ${
-        visible ? "translate-y-0" : "-translate-y-full"
-      }`}
-    >
-      <div className="bg-orange-1 rounded-xl h-[80px] px-12 flex-between">
-        <div className="flex gap-12">
-          <div className="text-lg text-white cursor-pointer">
-            Shop
-          </div>
+    <Sheet>
+      <nav
+        className={`w-full p-2 fixed top-0 z-50 transition-transform duration-300 ${
+          visible ? "translate-y-0" : "-translate-y-full"
+        }`}
+      >
+        <div className="bg-orange-1 rounded-xl h-[80px] px-4 md:px-8 xl:px-12 flex-between">
+          <div className="hidden lg:flex gap-12">
+            <Link href="#products">
+              <div className="text-lg text-white cursor-pointer">Shop</div>
+            </Link>
 
-          <div className="flex gap-2 cursor-pointer">
-            <div className="text-white text-lg ">
-              Search
+            <div className="flex gap-2 cursor-pointer">
+              <div className="text-white text-lg ">Search</div>
+              <Image
+                src="/images/search.svg"
+                alt="favorite logo"
+                width={20}
+                height={20}
+              />
             </div>
-            <Image
-              src="/images/search.svg"
-              alt="favorite logo"
-              width={20}
-              height={20}
-            />
+          </div>
+
+          <Link href="/">
+            <h2 className="h2 text-white cursor-pointer">Drippin'</h2>
+          </Link>
+
+          <div className="flex gap-8 items-center">
+            <div className="relative cursor-pointer">
+              <Image
+                src="/images/favorite.svg"
+                alt="favorite logo"
+                width={28}
+                height={28}
+              />
+              <span className="text-xs rounded-full bg-white text-orange-1 font-bold w-5 h-5 inline-block flex-center absolute -top-2 -right-2">
+                01
+              </span>
+            </div>
+
+            <SheetTrigger>
+              <div className="relative cursor-pointer">
+                <Image
+                  src="/images/cart.svg"
+                  alt="cart logo"
+                  width={28}
+                  height={28}
+                />
+                <span className="text-xs rounded-full bg-white text-orange-1 font-bold w-5 h-5 inline-block flex-center absolute -top-2 -right-2">
+                  01
+                </span>
+              </div>
+            </SheetTrigger>
           </div>
         </div>
+      </nav>
 
-        <h2 className="h2 text-white cursor-pointer">Drippin'</h2>
-
-        {/* <div>
-          <Input
-            type="text"
-            placeholder="Search..."
-            className="rounded-full border-none bg-white/20 placeholder-white text-white w-[350px] py-5 px-6"
-          />
-        </div> */}
-
-        <div className="flex gap-8 items-center">
-          <div className="relative cursor-pointer">
-            <Image
-              src="/images/favorite.svg"
-              alt="favorite logo"
-              width={28}
-              height={28}
-            />
-            <span className="text-xs rounded-full bg-white text-orange-1 font-bold w-5 h-5 inline-block flex-center absolute -top-2 -right-2">
-              01
-            </span>
-          </div>
-
-          <div className="relative cursor-pointer">
-            <Image
-              src="/images/cart.svg"
-              alt="cart logo"
-              width={28}
-              height={28}
-            />
-            <span className="text-xs rounded-full bg-white text-orange-1 font-bold w-5 h-5 inline-block flex-center absolute -top-2 -right-2">
-              01
-            </span>
-          </div>
-        </div>
-      </div>
-    </nav>
+      <SheetContent className="bg-white ">
+        <Cart />
+      </SheetContent>
+    </Sheet>
   );
 }

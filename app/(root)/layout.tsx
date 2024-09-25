@@ -1,4 +1,5 @@
 import Navbar from "@/components/shared/Navbar";
+import CartProvider from "./CartContext";
 
 export default function RootLayout({
   children,
@@ -6,9 +7,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-   <body>
-      <Navbar />
-      {children}
-   </body>
+    <CartProvider>
+      <body>
+        <Navbar />
+        {children}
+      </body>
+    </CartProvider>
   );
 }
