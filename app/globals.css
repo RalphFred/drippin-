@@ -18,7 +18,26 @@ h1, h2 {
   font-family: var(--font-sofadi)
 }
 
+
+.cart-bar::-webkit-scrollbar {
+  width: 4px; 
+
+}
+
+.cart-bar::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 10px; 
+}
+
+.cart-bar::-webkit-scrollbar-track {
+  background: transparent; 
+}
+
 @layer utilities {
+
+  .input-phone {
+    @apply rounded-[8px] border-2 outline-none border-gray-300 placeholder:text-slate-400 text-sm py-2 px-4 !important;
+   }
 
   .wrapper {
     @apply max-w-7xl lg:mx-auto p-5 md:px-10 xl:px-0 w-full;
@@ -50,5 +69,9 @@ h1, h2 {
   /* 32 */
   .h4 {
     @apply font-medium text-[32px] leading-[40px];
-  }   
+  } 
+}
+
+.input-phone input {
+  outline: none;
 }

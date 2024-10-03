@@ -6,9 +6,6 @@ import Link from "next/link";
 import {
   Sheet,
   SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
 import Cart from "./Cart";
@@ -41,7 +38,7 @@ export default function Navbar() {
       >
         <div className="bg-orange-1 rounded-xl h-[80px] px-4 md:px-8 xl:px-12 flex-between">
           <div className="hidden lg:flex gap-12">
-            <Link href="#products">
+            <Link href="/#products">
               <div className="text-lg text-white cursor-pointer">Shop</div>
             </Link>
 

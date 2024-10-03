@@ -4,4 +4,5 @@ export interface ProductProps {
   price: number;
   description?: string;
   imgUrl: string;
+  quantity?: number;
 }

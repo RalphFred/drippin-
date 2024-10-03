@@ -2,7 +2,7 @@ import { ProductProps } from "@/props";
 import Image from "next/image";
 import Link from "next/link";
 
-export default function ProductCard({ id, name, price, description, imgUrl}: ProductProps) {
+export default function ProductCard({ id, name, price, imgUrl}: ProductProps) {
 
   const formattedPrice = new Intl.NumberFormat('en-NG', {
     style: 'currency',

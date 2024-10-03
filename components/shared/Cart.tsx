@@ -1,6 +1,14 @@
 import { useCart } from "@/app/(root)/CartContext";
-import Image from "next/image";
+import CartCard from "./CartCard";
+import { Button } from "../ui/button";
 
+import {
+  AlertDialog,
+  AlertDialogContent,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+import { CustomerForm } from "./CustomerForm";
+import { SheetTrigger } from "../ui/sheet";
 
 export default function Cart() {
   const { cartItems, removeFromCart, updateCartItem } = useCart();
@@ -9,23 +17,49 @@ export default function Cart() {
     return <div>Your cart is empty</div>;
   }
 
+  const total = cartItems.reduce(
+    (sum, item) => sum + item.price * item.quantity,
+    0
+  );
+
+  const formattedTotal = new Intl.NumberFormat("en-NG", {
+    style: "currency",
+    currency: "NGN",
+  }).format(total);
+
   return (
-    <div className="bg-green-400 w-full h-full">
-      {cartItems.map((item) => (
-        <div key={item.id} className="flex items-center justify-between">
-          <Image src={item.imgUrl} alt={item.name} width={500} height={500} className="w-20 h-20" />
-          <div>{item.name}</div>
-          <div>{item.price}</div>
-          <div>
-            <input
-              type="number"
-              value={item.quantity}
-              onChange={(e) => updateCartItem(item.id, Number(e.target.value))}
+    <AlertDialog >
+      <div className="w-full flex flex-col h-full">
+        <p className="border-b py-4 border-slate-300 text-center">My Order</p>
+        <div className="flex-1 pb-2 overflow-y-auto cart-bar mb-8">
+          {cartItems.map((item) => (
+            <CartCard
+              key={item.id}
+              id={item.id}
+              name={item.name}
+              price={item.price}
+              imgUrl={item.imgUrl}
+              quantity={item.quantity}
             />
-          </div>
-          <button onClick={() => removeFromCart(item.id)}>Remove</button>
+          ))}
         </div>
-      ))}
-    </div>
+
+        <div className="flex-shrink-0 flex flex-col gap-4">
+          <div className="bg-light-1 rounded-[12px] text-center text-sm text-gray-500 py-2">
+            Subtotal: {formattedTotal}
+          </div>
+
+          <AlertDialogTrigger>
+            <Button className="bg-gray-800 text-white rounded-[12px] text-center w-full py-3 hover:bg-gray-900">
+              Proceed to Checkout
+            </Button>
+          </AlertDialogTrigger>
+        </div>
+      </div>
+
+      <AlertDialogContent className="bg-white rounded-[12px]">
+        <CustomerForm/>
+      </AlertDialogContent>
+    </AlertDialog>
   );
 }
