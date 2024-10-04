@@ -1,3 +1,4 @@
+"use client"
 import type { Metadata } from "next";
 import { Montserrat, Sofadi_One } from "next/font/google";
 import "./globals.css";
