@@ -21,6 +21,7 @@ import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
 import { usePayment } from "@/app/(root)/PaymentContext";
 import { AlertDialogAction, AlertDialogCancel } from "../ui/alert-dialog";
+import PaystackComponent from "./Paystack";
 
 const formSchema = z.object({
   fullname: z.string().min(2, {
@@ -34,8 +35,8 @@ const formSchema = z.object({
 });
 
 export function CustomerForm() {
-  const { cartItems } = useCart();
-  // const { updatePaymentInfo, submitPayment } = usePayment();
+  const { cartItems,  } = useCart();
+  const { updatePaymentInfo, submitPayment } = usePayment();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -46,8 +47,8 @@ export function CustomerForm() {
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    // updatePaymentInfo(values);
-    // submitPayment();
+    updatePaymentInfo(values);
+    submitPayment();
   }
 
   const total = cartItems.reduce(
@@ -159,6 +160,7 @@ export function CustomerForm() {
           >
             Checkout
           </Button>
+          <PaystackComponent />
       </form>
     </Form>
   );

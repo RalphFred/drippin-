@@ -1,18 +1,34 @@
 "use client";
+import { useCart } from "@/app/(root)/CartContext";
 import { usePayment } from "@/app/(root)/PaymentContext";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { PaystackButton } from "react-paystack";
 
 const PaystackComponent = () => {
-  const [email, setEmail] = useState(""); // The user's email
-  const [amount, setAmount] = useState(0); // Amount to pay (in kobo, 100 kobo = 1 NGN)
-  const publicKey = process.env.NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY || ""; // Paystack public key
-
   const { paymentInfo } = usePayment();
+  const { cartItems } = useCart();
+
+  const [email, setEmail] = useState("");
+  const [amount, setAmount] = useState(0);
+  const publicKey = process.env.NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY || "";
+
+  const total = cartItems.reduce(
+    (sum, item) => sum + item.price * item.quantity,
+    0
+  );
+
+  useEffect(() => {
+    if (paymentInfo) {
+      setEmail(paymentInfo.email || "");
+      setAmount(total * 100 || 0);
+    }
+  }, [paymentInfo]);
+
+  console.log(paymentInfo);
 
   const componentProps = {
     email,
-    amount: amount * 100, 
+    amount: amount * 100,
     publicKey,
     text: "Pay Now",
     onSuccess: (reference: any) => handleSuccess(reference),
@@ -23,25 +39,7 @@ const PaystackComponent = () => {
     console.log("Payment Successful:", reference);
   };
 
-  return (
-    <div>
-      <input
-        type="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        placeholder="Enter your email"
-        className="input"
-      />
-      <input
-        type="number"
-        value={amount}
-        onChange={(e) => setAmount(Number(e.target.value))}
-        placeholder="Amount"
-        className="input"
-      />
-      <PaystackButton {...componentProps} />
-    </div>
-  );
+  return <PaystackButton {...componentProps} />;
 };
 
 export default PaystackComponent;

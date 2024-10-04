@@ -9,12 +9,12 @@ export default function RootLayout({
 }>) {
   return (
     <CartProvider>
-      {/* <PaymentProvider> */}
+      <PaymentProvider>
         <body>
           <Navbar />
           {children}
         </body>
-      {/* </PaymentProvider> */}
+      </PaymentProvider>
     </CartProvider>
   );
 }
