@@ -8,7 +8,6 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { CustomerForm } from "./CustomerForm";
-import { SheetTrigger } from "../ui/sheet";
 
 export default function Cart() {
   const { cartItems, removeFromCart, updateCartItem } = useCart();
