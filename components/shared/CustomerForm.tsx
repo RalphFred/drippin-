@@ -35,7 +35,7 @@ const formSchema = z.object({
 
 export function CustomerForm() {
   const { cartItems } = useCart();
-  const { updatePaymentInfo, submitPayment } = usePayment();
+  // const { updatePaymentInfo, submitPayment } = usePayment();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -46,8 +46,8 @@ export function CustomerForm() {
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    updatePaymentInfo(values);
-    submitPayment();
+    // updatePaymentInfo(values);
+    // submitPayment();
   }
 
   const total = cartItems.reduce(
