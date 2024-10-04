@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
 import {
-  Dancing_Script,
-  Inter,
   Montserrat,
   Sofadi_One,
 } from "next/font/google";
