@@ -1,5 +1,6 @@
 import Navbar from "@/components/shared/Navbar";
 import CartProvider from "./CartContext";
+import PaymentProvider from "./PaymentContext";
 
 export default function RootLayout({
   children,
@@ -8,10 +9,12 @@ export default function RootLayout({
 }>) {
   return (
     <CartProvider>
-      <body>
-        <Navbar />
-        {children}
-      </body>
+      <PaymentProvider>
+        <body>
+          <Navbar />
+          {children}
+        </body>
+      </PaymentProvider>
     </CartProvider>
   );
 }
