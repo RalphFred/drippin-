@@ -1,35 +1,33 @@
 import type { Metadata } from "next";
-import {
-  Montserrat,
-  Sofadi_One,
-} from "next/font/google";
+import { Montserrat, Sofadi_One } from "next/font/google";
 import "./globals.css";
 
-export const montserrat = Montserrat({
+// Use the correct configuration for Montserrat and Sofadi One fonts
+const montserrat = Montserrat({
   weight: "500",
-  variable: "--font-montserrat",
   subsets: ["latin"],
+  variable: "--font-montserrat",
 });
 
-export const sofadi = Sofadi_One({
-  weight: ["400"],
-  variable: "--font-sofadi",
+const sofadi = Sofadi_One({
+  weight: "400",
   subsets: ["latin"],
+  variable: "--font-sofadi",
 });
 
 export const metadata: Metadata = {
   title: "Drippin'",
-  description: "Are You 🫵 Driping in Finesse?",
+  description: "Are You 🫵 Dripping in Finesse?",
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <html lang="en">
-      <body className="">
+    <html lang="en" className={`${montserrat.variable} ${sofadi.variable}`}>
+      <body>
         {children}
       </body>
     </html>
