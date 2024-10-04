@@ -1,9 +1,7 @@
-"use client"
 import type { Metadata } from "next";
 import { Montserrat, Sofadi_One } from "next/font/google";
 import "./globals.css";
 
-// Use the correct configuration for Montserrat and Sofadi One fonts
 const montserrat = Montserrat({
   weight: "500",
   subsets: ["latin"],
