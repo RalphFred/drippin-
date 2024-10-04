@@ -1,3 +1,7 @@
+import Navbar from "@/components/shared/Navbar";
+import CartProvider from "./CartContext";
+import PaymentProvider from "./PaymentContext";
+
 import type { Metadata } from "next";
 import { Montserrat, Sofadi_One } from "next/font/google";
 import "./globals.css";
@@ -16,7 +20,7 @@ const sofadi = Sofadi_One({
 
 export const metadata: Metadata = {
   title: "Drippin'",
-  description: "Are You 🫵 Dripping in Finesse?",
+  description: "Are You 🫵 Dripping in Fnpinesse?",
 };
 
 export default function RootLayout({
@@ -26,9 +30,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${montserrat.variable} ${sofadi.variable}`}>
-      <body>
-        {children}
-      </body>
+      <CartProvider>
+      <PaymentProvider>
+        <body>
+          <Navbar />
+          {children}
+        </body>
+      </PaymentProvider>
+    </CartProvider>
     </html>
   );
 }

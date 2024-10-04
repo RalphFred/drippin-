@@ -15,11 +15,11 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { useCart } from "@/app/(root)/CartContext";
+import { useCart } from "@/app/CartContext";
 
 import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
-import { usePayment } from "@/app/(root)/PaymentContext";
+import { usePayment } from "@/app/PaymentContext";
 import { AlertDialogAction, AlertDialogCancel } from "../ui/alert-dialog";
 import PaystackComponent from "./Paystack";
 

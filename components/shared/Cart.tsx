@@ -1,4 +1,4 @@
-import { useCart } from "@/app/(root)/CartContext";
+import { useCart } from "@/app/CartContext";
 import CartCard from "./CartCard";
 import { Button } from "../ui/button";
 
