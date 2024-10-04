@@ -40,23 +40,23 @@ export default function PaymentProvider({ children }: { children: React.ReactNod
 
 
   const initiatePaystackPayment = () => {
-    const paystackHandler = window.PaystackPop.setup({
-      key: process.env.NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY, 
-      email: paymentInfo.email,
-      amount: total * 100, 
-      currency: "NGN",
-      ref: `ref_${Math.floor(Math.random() * 1000000000)}`, 
-      callback: function(response) {
+    // const paystackHandler = window.PaystackPop.setup({
+    //   key: process.env.NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY, 
+    //   email: paymentInfo.email,
+    //   amount: total * 100, 
+    //   currency: "NGN",
+    //   ref: `ref_${Math.floor(Math.random() * 1000000000)}`, 
+    //   callback: function(response) {
       
-        console.log("Payment successful. Transaction ref: ", response.reference);
+    //     console.log("Payment successful. Transaction ref: ", response.reference);
         
-      },
-      onClose: function() {
-        alert("Transaction was not completed, window closed.");
-      },
-    });
+    //   },
+    //   onClose: function() {
+    //     alert("Transaction was not completed, window closed.");
+    //   },
+    // });
 
-    paystackHandler.openIframe();
+    // paystackHandler.openIframe();
   };
 
   const submitPayment = async () => {
