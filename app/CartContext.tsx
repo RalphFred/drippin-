@@ -13,6 +13,7 @@ export type CartItem = {
 interface CartContextType {
   cartItems: CartItem[];
   addToCart: (item: CartItem) => void;
+  clearCart: () => void;
   removeFromCart: (id: string) => void;
   updateCartItem: (id: string, quantity: number) => void;
 }
@@ -55,6 +56,11 @@ export default function CartProvider({ children }: { children: React.ReactNode }
     });
   };
 
+  const clearCart = () => {
+    setCartItems([]); 
+    localStorage.removeItem("cart"); 
+  };
+
   const updateCartItem = (id: string, quantity: number) => {
     setCartItems(prevItems => {
       const updatedCart = prevItems.map(item =>
@@ -66,7 +72,7 @@ export default function CartProvider({ children }: { children: React.ReactNode }
   };
 
   return (
-    <CartContext.Provider value={{ cartItems, addToCart, removeFromCart, updateCartItem }}>
+    <CartContext.Provider value={{ cartItems, addToCart, clearCart, removeFromCart, updateCartItem }}>
       {children}
     </CartContext.Provider>
   );

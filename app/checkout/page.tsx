@@ -1,10 +1,14 @@
-"use client"
-import CustomerForm from "@/components/shared/CustomerForm";
+import dynamic from "next/dynamic";
+
+const DynamicComponentWithNoSSR = dynamic(
+  () => import('@/components/shared/CustomerForm'),
+  { ssr: false }
+)
 
 export default function CheckoutPage() {
   return (
     <div className=" wrapper flex-center">
-      <CustomerForm />
+      <DynamicComponentWithNoSSR />
     </div>
   );
 }

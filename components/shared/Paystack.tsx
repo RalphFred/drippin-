@@ -7,7 +7,7 @@ import { PaystackButton } from "react-paystack";
 
 export default function Paystack() {
   const { paymentInfo } = usePayment();
-  const { cartItems } = useCart();
+  const { cartItems, clearCart } = useCart();
   const router = useRouter();
 
   const [email, setEmail] = useState("");
@@ -53,15 +53,15 @@ export default function Paystack() {
     text: "Pay Now",
     onSuccess: () =>{
       
-      alert("Thanks for doing business with us! Come back soon!!");
+      alert("Enjoy your Summer, Come back soon!!");
       router.push("/#products");
     },
-    onClose: () => alert("Wait! You need this oil, don't go!!!!"),
+    onClose: () => alert("Chill, You need to drip"),
   }
 
   const handleSuccess = (reference: any) => {
     console.log("Payment Successful:", reference);
-    
+    clearCart();
   };
 
   return (
