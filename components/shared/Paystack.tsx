@@ -30,7 +30,7 @@ export default function Paystack() {
       setName(paymentInfo.fullname || "")
       setPhone(paymentInfo.number || "")
     }
-  }, [paymentInfo]);
+  }, [paymentInfo, total]);
 
   const componentProps = {
     email,

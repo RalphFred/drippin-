@@ -152,7 +152,7 @@ export default function CustomerForm() {
           <span className="inline-block">{formattedTotal}</span>
         </div>
 
-        <PaystackComponent onClick={onSubmit}/>
+        <PaystackComponent />
       </form>
     </Form>
   );
