@@ -1,5 +1,6 @@
 "use client";
 import { Button } from "@/components/ui/button";
+import { useToast } from "@/components/hooks/use-toast";
 import { products } from "@/constants";
 import Image from "next/image";
 import { useState } from "react";
@@ -7,7 +8,8 @@ import { useCart } from "../../CartContext";
 
 export default function Page({ params }: { params: { slug: string } }) {
   const [quantity, setQuantity] = useState(1);
-  
+  const { toast } = useToast();
+
   const product = products.find((p) => p.id === params.slug);
 
   if (!product) {
@@ -21,13 +23,28 @@ export default function Page({ params }: { params: { slug: string } }) {
     currency: "NGN",
   }).format(price);
 
-  
   const { addToCart } = useCart();
 
   const handleAddToCart = () => {
-    addToCart({ id, name, price, quantity, imgUrl });
+    const newItem = { id, name, price, quantity, imgUrl };
+  
+    
+    addToCart(newItem);
+  
+    const storedCart = JSON.parse(localStorage.getItem("cart") || "[]");
+  
+    const existingItem = storedCart.find((item: CartItem) => item.id === newItem.id);
+  
+    if (existingItem) {
+      existingItem.quantity += newItem.quantity;
+    } else {
+      storedCart.push(newItem);
+    }
+  
+    localStorage.setItem("cart", JSON.stringify(storedCart));
+    console.log(storedCart);
   };
-
+  
 
   return (
     <div className="wrapper mt-[100px] flex flex-col lg:flex-row gap-16">
@@ -48,7 +65,7 @@ export default function Page({ params }: { params: { slug: string } }) {
 
           <div className="flex items-center justify-between w-[150px] h-[48px] border border-gray-300 rounded-[12px]">
             <Button
-              onClick={() => setQuantity((prev) => prev > 0 ? prev - 1 : 0)}
+              onClick={() => setQuantity((prev) => (prev > 0 ? prev - 1 : 0))}
               className="h-full px-4 py-0 text-lg rounded-tl-[12px] rounded-bl-[12px] border-r border-gray-300"
             >
               –
@@ -77,7 +94,15 @@ export default function Page({ params }: { params: { slug: string } }) {
                 height={24}
               />
             </Button>
-            <Button className="rounded-[12px] h-[50px] border w-full hover:bg-light-2"  onClick={handleAddToCart}>
+            <Button
+              className="rounded-[12px] h-[50px] border w-full hover:bg-light-2"
+              onClick={() => {
+                handleAddToCart();
+                toast({
+                  description: "Your item has been added to the cart.",
+                });
+              }}
+            >
               <span className="inline-block mr-4">Add to cart </span>
               <Image
                 src="/images/cart-orange.svg"

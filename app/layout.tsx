@@ -5,6 +5,7 @@ import PaymentProvider from "./PaymentContext";
 import type { Metadata } from "next";
 import { Montserrat, Sofadi_One } from "next/font/google";
 import "./globals.css";
+import { Toaster } from "@/components/ui/toaster";
 
 const montserrat = Montserrat({
   weight: "500",
@@ -31,13 +32,14 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${montserrat.variable} ${sofadi.variable}`}>
       <CartProvider>
-      <PaymentProvider>
-        <body>
-          <Navbar />
-          {children}
-        </body>
-      </PaymentProvider>
-    </CartProvider>
+        <PaymentProvider>
+          <body className="relative">
+            <Navbar />
+            <main>{children}</main>
+            <Toaster />
+          </body>
+        </PaymentProvider>
+      </CartProvider>
     </html>
   );
 }

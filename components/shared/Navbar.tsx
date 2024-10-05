@@ -9,10 +9,14 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import Cart from "./Cart";
+import { useCart } from "@/app/CartContext";
 
 export default function Navbar() {
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [visible, setVisible] = useState(true);
+  const { cartItems } = useCart();
+
+  const numberOfItems = cartItems.length;
 
   // Effect to track scroll direction
   useEffect(() => {
@@ -79,7 +83,7 @@ export default function Navbar() {
                   height={28}
                 />
                 <span className="text-xs rounded-full bg-white text-orange-1 font-bold w-5 h-5 inline-block flex-center absolute -top-2 -right-2">
-                  01
+                {numberOfItems}
                 </span>
               </div>
             </SheetTrigger>

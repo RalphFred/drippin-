@@ -2,15 +2,12 @@ import { useCart } from "@/app/CartContext";
 import CartCard from "./CartCard";
 import { Button } from "../ui/button";
 
-import {
-  AlertDialog,
-  AlertDialogContent,
-  AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
-import { CustomerForm } from "./CustomerForm";
+import { AlertDialog } from "@/components/ui/alert-dialog";
+import { SheetTrigger } from "../ui/sheet";
+import Link from "next/link";
 
 export default function Cart() {
-  const { cartItems, removeFromCart, updateCartItem } = useCart();
+  const { cartItems } = useCart();
 
   if (cartItems.length === 0) {
     return <div>Your cart is empty</div>;
@@ -27,7 +24,7 @@ export default function Cart() {
   }).format(total);
 
   return (
-    <AlertDialog >
+    <AlertDialog>
       <div className="w-full flex flex-col h-full">
         <p className="border-b py-4 border-slate-300 text-center">My Order</p>
         <div className="flex-1 pb-2 overflow-y-auto cart-bar mb-8">
@@ -48,17 +45,14 @@ export default function Cart() {
             Subtotal: {formattedTotal}
           </div>
 
-          <AlertDialogTrigger>
-            <Button className="bg-gray-800 text-white rounded-[12px] text-center w-full py-3 hover:bg-gray-900">
-              Proceed to Checkout
-            </Button>
-          </AlertDialogTrigger>
+          <Link
+            href="/checkout"
+            className="bg-gray-800 text-white rounded-[12px] text-center w-full py-3 hover:bg-gray-900 inline-block h-[50px]"
+          >
+            <SheetTrigger>Proceed to Checkout</SheetTrigger>
+          </Link>
         </div>
       </div>
-
-      <AlertDialogContent className="bg-white rounded-[12px]">
-        <CustomerForm/>
-      </AlertDialogContent>
     </AlertDialog>
   );
 }

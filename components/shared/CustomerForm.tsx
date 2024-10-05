@@ -4,7 +4,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { number, z } from "zod";
 
-import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -23,6 +22,8 @@ import { usePayment } from "@/app/PaymentContext";
 import { AlertDialogAction, AlertDialogCancel } from "../ui/alert-dialog";
 import PaystackComponent from "./Paystack";
 
+import { PaystackButton } from "react-paystack";
+
 const formSchema = z.object({
   fullname: z.string().min(2, {
     message: "Enter a valid name",
@@ -34,8 +35,8 @@ const formSchema = z.object({
   }),
 });
 
-export function CustomerForm() {
-  const { cartItems,  } = useCart();
+export default function CustomerForm() {
+  const { cartItems } = useCart();
   const { updatePaymentInfo, submitPayment } = usePayment();
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -63,12 +64,9 @@ export function CustomerForm() {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="bg-white">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="bg-white w-full md:w-[36rem] lg:w-[56rem] mt-[120px]">
         <div className="flex-between">
-          <div className="text-lg font-semibold">Contact Details</div>
-          <AlertDialogCancel className="border-none p-0 m-0">
-            <span className="inline-block text-red-400">&#10005;</span>
-          </AlertDialogCancel>
+          <div className="text-3xl mb-8 font-semibold">Contact Details</div>
         </div>
         <div className="flex flex-col gap-4 mb-6">
           <FormField
@@ -154,13 +152,7 @@ export function CustomerForm() {
           <span className="inline-block">{formattedTotal}</span>
         </div>
 
-          <Button
-            type="submit"
-            className="bg-gray-800 text-white rounded-[12px] text-center w-full h-[40px] hover:bg-gray-900"
-          >
-            Checkout
-          </Button>
-          <PaystackComponent />
+        <PaystackComponent onClick={onSubmit}/>
       </form>
     </Form>
   );

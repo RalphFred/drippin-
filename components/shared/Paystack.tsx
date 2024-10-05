@@ -1,12 +1,14 @@
 "use client";
 import { useCart } from "@/app/CartContext";
 import { usePayment } from "@/app/PaymentContext";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { PaystackButton } from "react-paystack";
 
 export default function Paystack() {
   const { paymentInfo } = usePayment();
   const { cartItems } = useCart();
+  const router = useRouter();
 
   const [email, setEmail] = useState("");
   const [amount, setAmount] = useState(0);
@@ -49,17 +51,23 @@ export default function Paystack() {
     },
     publicKey,
     text: "Pay Now",
-    onSuccess: () =>
-      alert("Thanks for doing business with us! Come back soon!!"),
+    onSuccess: () =>{
+      
+      alert("Thanks for doing business with us! Come back soon!!");
+      router.push("/#products");
+    },
     onClose: () => alert("Wait! You need this oil, don't go!!!!"),
   }
 
   const handleSuccess = (reference: any) => {
     console.log("Payment Successful:", reference);
+    
   };
 
   return (
-    <PaystackButton {...componentProps} />
+    <div>
+      <PaystackButton {...componentProps} className="bg-gray-800 text-white rounded-[12px] text-center w-full h-[50px] hover:bg-gray-900"/>
+    </div>
   );
 };
 
