@@ -54,6 +54,7 @@ export default function Paystack() {
     onSuccess: () =>{
       
       alert("Enjoy your Summer, Come back soon!!");
+      clearCart();
       router.push("/#products");
     },
     onClose: () => alert("Chill, You need to drip"),
@@ -61,7 +62,6 @@ export default function Paystack() {
 
   const handleSuccess = (reference: any) => {
     console.log("Payment Successful:", reference);
-    clearCart();
   };
 
   return (
