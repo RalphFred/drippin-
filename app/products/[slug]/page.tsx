@@ -4,7 +4,7 @@ import { useToast } from "@/components/hooks/use-toast";
 import { products } from "@/constants";
 import Image from "next/image";
 import { useState } from "react";
-import { useCart } from "../../CartContext";
+import { useCart, CartItem } from "../../CartContext";
 
 export default function Page({ params }: { params: { slug: string } }) {
   const [quantity, setQuantity] = useState(1);
